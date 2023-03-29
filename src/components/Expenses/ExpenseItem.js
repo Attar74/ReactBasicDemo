@@ -1,15 +1,25 @@
+import { useState } from 'react';
 import "./ExpenseItem.css";
 import ExpenseDate from "./ExpenseDate.js";
 import Card from "../UI/Card.js"
 
-const ExpenseItem = ({item}) => {    
+const ExpenseItem = ({item}) => {
+
+  // react hook
+  const [title, setTitle] = useState(item.title);  
+
+  const changeTitle = () => {
+    setTitle("updated");
+  };
+  
   return (
     <Card className="expense-item">
       <ExpenseDate date={item.date} />
       <div className="expense-item__description">
-        <h2>{item.title}</h2>
+        <h2>{title}</h2>
         <div className="expense-item__price">{item.price}</div>
       </div>
+      <button onClick={changeTitle}> Change Title</button>
     </Card>
   );  
 }
