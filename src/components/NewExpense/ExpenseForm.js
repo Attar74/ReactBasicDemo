@@ -8,6 +8,8 @@ const ExpenseForm = ({ onSaveExpenseData  }) => {
     enteredDate: "",
   });
 
+  const [formStatus, setFormStatus] = useState(false)
+
   const titleChangeHandler = (event) => {
     setUserInput((prevState) => {
       return {
@@ -34,7 +36,19 @@ const ExpenseForm = ({ onSaveExpenseData  }) => {
       };
     });
   };
-
+  const resetForm = ()=> {
+    setUserInput({
+      enteredTtile: "",
+      enteredPrice: "",
+      enteredDate: "",
+    });
+  }
+  const toggleFormStatus = ()=> {
+    setFormStatus((prevStatus) => {
+      return !prevStatus
+    })
+    resetForm()
+  }
   const submitHnadler = (e) => {
     e.preventDefault();
 
@@ -44,13 +58,12 @@ const ExpenseForm = ({ onSaveExpenseData  }) => {
       date: new Date(userInput.enteredDate),
     };
     onSaveExpenseData(expenseDataObj);
-    setUserInput({
-      enteredTtile: "",
-      enteredPrice: "",
-      enteredDate: "",
-    });
+    toggleFormStatus()
   };
 
+  if(!formStatus) {
+    return (<button class="add-btn" onClick={toggleFormStatus}>Add New Expenses</button>)
+  }
   return (
     <form onSubmit={submitHnadler}>
       <div className="new-expense__controls">
@@ -88,6 +101,7 @@ const ExpenseForm = ({ onSaveExpenseData  }) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button class="add-btn" onClick={toggleFormStatus}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>

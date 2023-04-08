@@ -1,7 +1,7 @@
 import { useState } from "react";
-import ExpenseItem from "./ExpenseItem.js";
 import "./Expenses.css";
 import ExpensesFilter from "./ExpensesFilter.js";
+import ExpenseList from "./ExpensesList.js";
 
 
 const Expenses = ({ items }) => {
@@ -11,16 +11,15 @@ const Expenses = ({ items }) => {
     const setSelectedDateFun = (d) => {
       setSelecteddate(d)
     }
-    const isItInTheRange = (item) => {      
-      return selecteddate.length ? selecteddate===new Date(item.date).toISOString().slice(0, 4) ? true : false : true;
-    }
-    const getItems = items.map((expense) => {
-      return (isItInTheRange(expense) ? <ExpenseItem item={expense} key={expense.id} /> : "");
-    });
+
+    const filterdExpenses = items.filter((expense) => {
+      return selecteddate ? expense.date.getFullYear().toString() == selecteddate : true
+    })
+
   return (
     <div>
       <ExpensesFilter onChangeFilter={setSelectedDateFun} />
-      {getItems}
+      <ExpenseList filterdExpenses={filterdExpenses}/>
     </div>
   );
 }
