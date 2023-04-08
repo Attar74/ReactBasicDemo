@@ -62,7 +62,7 @@ const ExpenseForm = ({ onSaveExpenseData  }) => {
   };
 
   if(!formStatus) {
-    return (<button class="add-btn" onClick={toggleFormStatus}>Add New Expenses</button>)
+    return (<button className="add-btn" onClick={toggleFormStatus}>Add New Expenses</button>)
   }
   return (
     <form onSubmit={submitHnadler}>
@@ -101,7 +101,7 @@ const ExpenseForm = ({ onSaveExpenseData  }) => {
         </div>
       </div>
       <div className="new-expense__actions">
-        <button class="add-btn" onClick={toggleFormStatus}>Cancel</button>
+        <button className="add-btn" onClick={toggleFormStatus}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
