@@ -4,7 +4,7 @@ import "./ExpenseForm.css";
 const ExpenseForm = ({ onSaveExpenseData  }) => {
   const [userInput, setUserInput] = useState({
     enteredTtile: "",
-    enteredPrice: "",
+    enteredAmount: "",
     enteredDate: "",
   });
 
@@ -19,11 +19,11 @@ const ExpenseForm = ({ onSaveExpenseData  }) => {
     });
   };
 
-  const priceChangeHandler = (event) => {
+  const amountChangeHandler = (event) => {
     setUserInput((prevState) => {
       return {
         ...prevState,
-        enteredPrice: event.target.value,
+        enteredAmount: event.target.value,
       };
     });
   };
@@ -39,7 +39,7 @@ const ExpenseForm = ({ onSaveExpenseData  }) => {
   const resetForm = ()=> {
     setUserInput({
       enteredTtile: "",
-      enteredPrice: "",
+      enteredAmount: "",
       enteredDate: "",
     });
   }
@@ -54,7 +54,7 @@ const ExpenseForm = ({ onSaveExpenseData  }) => {
 
     const expenseDataObj = {
       title: userInput.enteredTtile,
-      price: userInput.enteredPrice,
+      amount: userInput.enteredAmount,
       date: new Date(userInput.enteredDate),
     };
     onSaveExpenseData(expenseDataObj);
@@ -78,13 +78,13 @@ const ExpenseForm = ({ onSaveExpenseData  }) => {
       </div>
       <div className="new-expense__controls">
         <div className="new-expense__control">
-          <label> price </label>
+          <label> Amount </label>
           <input
             type="number"
             min="0.01"
             step="0.01"
-            onChange={priceChangeHandler}
-            value={userInput.enteredPrice}
+            onChange={amountChangeHandler}
+            value={userInput.enteredAmount}
           />
         </div>
       </div>
